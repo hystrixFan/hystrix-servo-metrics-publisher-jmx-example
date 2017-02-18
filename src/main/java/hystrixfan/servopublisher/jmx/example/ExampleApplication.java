@@ -7,6 +7,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.netflix.hystrix.contrib.servopublisher.HystrixServoMetricsPublisher;
+import com.netflix.hystrix.strategy.HystrixPlugins;
+
 /**
  * Created by hystrixFan on 13.02.2017.
  */
@@ -14,6 +17,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableCircuitBreaker
 @SpringBootApplication
 public class ExampleApplication extends SpringBootServletInitializer {
+  static {
+    HystrixPlugins.getInstance().registerMetricsPublisher(HystrixServoMetricsPublisher.getInstance());
+  }
+
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
     return application.sources(ExampleApplication.class);
