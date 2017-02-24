@@ -11,7 +11,7 @@ public class RemoteService {
   public String call() {
     int randomInt = RandomUtils.nextInt(9);
     if (randomInt == 4) {
-      throw new RemoteServiceException("Remote Service Exception");
+      throw new RemoteServiceException("Something terrible has happened");
     } else if (randomInt == 5) {
       delay(3000);
     }
@@ -23,7 +23,7 @@ public class RemoteService {
     try {
       Thread.sleep(millis);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      throw new RemoteServiceException("Something terrible has happened", e);
     }
   }
 }
